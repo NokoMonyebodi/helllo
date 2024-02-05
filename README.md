@@ -1,7 +1,3 @@
 # Welcome to streamlit
 
-This is the app you get when you run `streamlit hello`, extracted as its own app.
-
-Edit [Hello.py](./Hello.py) to customize this app to your heart's desire. ❤️
-
-Check it out on [Streamlit Community Cloud](https://st-hello-app.streamlit.app/)
+This represents a logarithmic-scale graph illustrating the correlation between frequency and flux in the MJ0414 gravitationally lensed system. The graph depicts the spectrum of observed celestial sources, enabling the calculation of flux ratios relative to A1, facilitating a comprehensive analysis of the sources in the observed field.
