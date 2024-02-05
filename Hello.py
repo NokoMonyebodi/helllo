@@ -1,4 +1,4 @@
-# Copyright (c) Streamlit Inc. (2018-2022) Snowflake Inc. (2022)
+## Copyright (c) Streamlit Inc. (2018-2022) Snowflake Inc. (2022)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,39 +13,45 @@
 # limitations under the License.
 
 import streamlit as st
-from streamlit.logger import get_logger
+import pandas as pd
+import subprocess
+import matplotlib.pyplot as plt
 
-LOGGER = get_logger(__name__)
-
-
-def run():
-    st.set_page_config(
-        page_title="Hello",
-        page_icon="👋",
-    )
-
-    st.write("# Welcome to Streamlit! 👋")
-
-    st.sidebar.success("Select a demo above.")
-
-    st.markdown(
-        """
-        Streamlit is an open-source app framework built specifically for
-        Machine Learning and Data Science projects.
-        **👈 Select a demo from the sidebar** to see some examples
-        of what Streamlit can do!
-        ### Want to learn more?
-        - Check out [streamlit.io](https://streamlit.io)
-        - Jump into our [documentation](https://docs.streamlit.io)
-        - Ask a question in our [community
-          forums](https://discuss.streamlit.io)
-        ### See more complex demos
-        - Use a neural net to [analyze the Udacity Self-driving Car Image
-          Dataset](https://github.com/streamlit/demo-self-driving)
-        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
-    """
-    )
+import pandas as pd
+import matplotlib.pyplot 
 
 
-if __name__ == "__main__":
-    run()
+# Install required packages
+subprocess.run(['pip', 'install', 'matplotlib'])
+
+
+# Sample data (replace this with your data)
+data = {
+    'Flux': [0.0635896, 0.06832498, 0.07357413, 0.079442389, 0.08693351, 0.09378168, 0.0285238, 0.0304512, 0.0326057,
+             0.0351447, 0.0384098, 0.0411464, 0.0107654, 0.0115086, 0.0122346, 0.0133011, 0.0144021, 0.0154852, 0.07217133,
+             0.07744611, 0.08228934, 0.08970974, 0.09717094, 0.1050358],
+    'Frequency': [17.447, 16.423, 15.447, 14.423, 13.447, 12.423, 17.447, 16.423, 15.447, 14.423, 13.447, 12.423, 17.447,
+                  16.423, 15.447, 14.423, 13.447, 12.423, 17.447, 16.423, 15.447, 14.423, 13.447, 12.423]
+}
+
+# Converting the data to a DataFrame
+df = pd.DataFrame(data)
+
+# Streamlit app begins here
+st.title('Flux vs Frequency Plot')
+
+# Plotting with Matplotlib
+fig, ax = plt.subplots()
+ax.plot(df['Frequency'][0:6], df['Flux'][0:6], "*", label='A2')
+ax.plot(df['Frequency'][6:12], df['Flux'][6:12], "*", label='B')
+ax.plot(df['Frequency'][12:18], df['Flux'][12:18], "*", label='C')
+ax.plot(df['Frequency'][18:24], df['Flux'][18:24], "*", label='A1')
+
+ax.set_yscale('log')
+ax.set_xscale('log')
+ax.set_xlabel("Frequency [GHz]")
+ax.set_ylabel("Flux [Jy]")
+ax.legend()
+
+# Display the Matplotlib plot using st.pyplot
+st.pyplot(fig)
